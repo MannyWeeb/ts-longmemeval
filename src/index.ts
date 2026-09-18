@@ -12,8 +12,9 @@ const RUN_TYPE = args[0];
 console.log(`LongMemEval Benchmark`);
 console.log(`Run Type: ${RUN_TYPE}`);
 // Load dataset
-const data = await dataset(RUN_TYPE);
+let data = await dataset(RUN_TYPE);
 
+//data = data.slice(250);
 // Build evaluation context and assemble into batched workloads
 const batches = batch(data, Number(process.env.READER_BATCH_SIZE ?? 2));
 

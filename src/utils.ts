@@ -34,7 +34,7 @@ export function save_json(file_path: string, obj: object){
 /* Start of API calls */
 const REQUEST_TIMEOUT_MS = 500_000;
 const BACKOFF_MS = 3000;
-const MAX_RETRIES = 5;
+const MAX_RETRIES = 3;
 
 export async function with_retry<T>(what: string, operation: (attempt:number)=> Promise<T>): Promise<T>{
   for(let attempt = 0; attempt <= MAX_RETRIES; attempt++){

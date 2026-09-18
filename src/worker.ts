@@ -34,9 +34,11 @@ export default async(run_type: string, batches: LongMemEvalQuestion[][])=>{
       const response = await chat(messages, { model });
       
       const result = {
-        llm_answer: response ? response.text : "",
+        llm_answer: response!.text,
         question: q,
-        run_type
+        run_type,
+        completion_tokens: response!.completion_tokens,
+        prompt_tokens: response!.prompt_tokens
       }
 
       save_json(`./artifacts/preflight-messages/${run_type}/sent-message-${q.question_id}.json`, messages);
@@ -48,7 +50,9 @@ export default async(run_type: string, batches: LongMemEvalQuestion[][])=>{
         llm_answer: response ? response.text : "",
         question_type: q.question_type,
         start: new Date(timer.delta!).toISOString(),
-        end: new Date().toISOString()
+        end: new Date().toISOString(),
+        completion_tokens: response!.completion_tokens,
+        prompt_tokens: response!.prompt_tokens
       };
       console.log(`[worker]finished ${q.question_id} ${i}:(${q_i}/${batches[i].length}) -> Duration: ${timer.toggle()}`);
       save_json(result_path, cache);
