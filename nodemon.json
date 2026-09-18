@@ -1,0 +1,4 @@
+{
+  "ignore": ["**/*.json", "data", "cache", "results"],
+  "exec": "tsx src/index.ts"
+}

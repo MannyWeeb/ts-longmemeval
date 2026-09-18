@@ -1,0 +1,7 @@
+node_modules
+.env
+
+data/**.json
+results/**.json
+artifacts/**/**.json
+src/custom-mem/**.json
